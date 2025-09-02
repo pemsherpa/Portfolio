@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template
 
-# create the app
+# Initialize Flask application
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "dev-secret-key")
 
@@ -31,4 +31,4 @@ def contact():
     return render_template('contact.html', current_page='contact')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)
