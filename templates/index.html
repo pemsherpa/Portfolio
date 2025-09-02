@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pema Tshering Sherpa - Portfolio</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* P5.js Canvas Background */
+        #p5-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid #333;
+            z-index: 1000;
+            padding: 2rem 0;
+            transition: transform 0.3s ease;
+        }
+
+        nav.mobile-hidden {
+            transform: translateX(-100%);
+        }
+
+        .nav-brand {
+            padding: 0 2rem 2rem;
+            border-bottom: 1px solid #333;
+            margin-bottom: 2rem;
+        }
+
+        .nav-brand h1 {
+            font-size: 1.2rem;
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-brand p {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 0.5rem 2rem;
+            display: block;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1001;
+            background: none;
+            border: none;
+            color: #e0e0e0;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 200px;
+            min-height: 100vh;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 4rem 3rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .section-content {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        /* Home Section */
+        .home {
+            justify-content: center;
+            text-align: left;
+        }
+
+        .home h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: normal;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .home h2 {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: #888;
+            font-weight: normal;
+            margin-bottom: 2rem;
+        }
+
+        .home p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        /* About Section */
+        .about {
+            padding-right: 6rem;
+        }
+
+        .about h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-weight: normal;
+        }
+
+        .about p {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Experience Section */
+        .experience h2 {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            font-weight: normal;
+        }
+
+        .job {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .job:last-child {
+            border-bottom: none;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .job-title {
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .job-date {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .job-description {
+            line-height: 1.7;
+        }
+
+        /* Projects Section */
+        .projects h2 {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            font-weight: normal;
+        }
+
+        .project {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .project:last-child {
+            border-bottom: none;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact {
+            min-height: 60vh;
+        }
+
+        .contact h2 {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            font-weight: normal;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #fff;
+        }
+
+        .contact-link i {
+            margin-right: 1rem;
+            width: 20px;
+        }
+
+        .footer-text {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            nav {
+                transform: translateX(-100%);
+            }
+
+            nav.mobile-open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            section {
+                padding: 3rem 2rem;
+            }
+
+            .about {
+                padding-right: 2rem;
+            }
+
+            .job-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .contact-links {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: 2rem 1rem;
+            }
+
+            .home h1 {
+                font-size: 2rem;
+            }
+
+            .home h2 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- P5.js Canvas for Interactive Background -->
+    <div id="p5-canvas"></div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-toggle" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav id="nav">
+        <div class="nav-brand">
+            <h1>Pema Tshering Sherpa</h1>
+            <p>Developer & Data Scientist</p>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#experience" class="nav-link">Experience</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="home">
+            <div class="section-content">
+                <h1>Pema Tshering Sherpa</h1>
+                <h2>Software Developer | Junior Data Scientist | AI & Data Enthusiast</h2>
+                <p>I am a passionate developer and data scientist specializing in AI. I build dynamic, intelligent applications and leverage data to uncover insights and drive innovation.</p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="section-content">
+                <h2>About</h2>
+                <p>I am currently pursuing a Bachelor of Technology in AI and Data Science at RV University. My journey in technology is driven by a fascination with building intelligent systems that solve real-world problems. From developing a sign language translation device to engineering RAG pipelines for enterprise data, I thrive on challenges that sit at the intersection of software development and machine learning.</p>
+                <p>My goal is to continue learning and contributing to innovative projects, particularly in the fields of AI, data analysis, and financial technology.</p>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="experience">
+            <div class="section-content">
+                <h2>Experience</h2>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <div class="job-title">Software Developer - Brainservicing</div>
+                        <div class="job-date">June 2025 - Present</div>
+                    </div>
+                    <div class="job-description">
+                        Building ThinkEvents, an online event booking platform in Nepal, designed to bridge the gap between the entertainment industry and audiences.
+                    </div>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div class="job-title">Software Developer Intern - CarbonSustain</div>
+                        <div class="job-date">Jan 2025 - June 2025</div>
+                    </div>
+                    <div class="job-description">
+                        Designed and implemented Python-based APIs and automated data pipelines for an AI-powered carbon emissions tracking platform (Scope 1-3). Collaborated in Agile teams to enhance reporting accuracy and scalability.
+                    </div>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div class="job-title">Junior Software Developer / Junior Data Analyst - KarmaOps</div>
+                        <div class="job-date">July 2024 - Feb 2025</div>
+                    </div>
+                    <div class="job-description">
+                        Developed a Retrieval-Augmented Generation (RAG) pipeline for U.S. oil companies, improving data querying efficiency by ~15%. Cleaned and analyzed operational datasets to identify redundancies, leveraging ML for anomaly detection.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects">
+            <div class="section-content">
+                <h2>Projects</h2>
+                
+                <div class="project">
+                    <div class="project-title">SilentSync: Sign Language Converting Gloves</div>
+                    <div class="project-description">
+                        An innovative IoT project featuring gloves equipped with an ESP32 to translate sign language into English in real-time. This project secured 2nd place at the IEEE RAS Student Summit 2025 for its unique use of light signals for gesture detection.
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="project-title">RAG for KarmaOps</div>
+                    <div class="project-description">
+                        Built an MVP for KarmaOps using LangChain, Streamlit, and PostgreSQL. This agentic LLM-powered software was designed to query company data using natural language, estimated to increase operational efficiency by 15%.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="section-content">
+                <h2>Contact</h2>
+                <div class="contact-links">
+                    <a href="mailto:ptssherpa5@gmail.com" class="contact-link">
+                        <i class="fas fa-envelope"></i>
+                        ptssherpa5@gmail.com
+                    </a>
+                    <a href="https://github.com" class="contact-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>
+                    <a href="https://linkedin.com" class="contact-link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                        LinkedIn
+                    </a>
+                </div>
+                <div class="footer-text">
+                    Designed & Built by Pema Tshering Sherpa
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // P5.js Interactive Background
+        let particles = [];
+        let mousePos;
+
+        function setup() {
+            let canvas = createCanvas(windowWidth, windowHeight);
+            canvas.parent('p5-canvas');
+            
+            // Initialize particles
+            for (let i = 0; i < 100; i++) {
+                particles.push(new Particle());
+            }
+            
+            mousePos = createVector(mouseX, mouseY);
+        }
+
+        function draw() {
+            clear();
+            
+            // Update mouse position
+            mousePos.set(mouseX, mouseY);
+            
+            // Update and display particles
+            for (let particle of particles) {
+                particle.update();
+                particle.display();
+            }
+            
+            // Draw connections between nearby particles
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    let dist = p5.Vector.dist(particles[i].pos, particles[j].pos);
+                    if (dist < 120) {
+                        stroke(100, 100, 100, map(dist, 0, 120, 100, 0));
+                        strokeWeight(0.5);
+                        line(particles[i].pos.x, particles[i].pos.y, 
+                             particles[j].pos.x, particles[j].pos.y);
+                    }
+                }
+            }
+        }
+
+        class Particle {
+            constructor() {
+                this.pos = createVector(random(width), random(height));
+                this.vel = createVector(random(-0.5, 0.5), random(-0.5, 0.5));
+                this.size = random(2, 4);
+            }
+            
+            update() {
+                // Add mouse influence
+                let mouseForce = p5.Vector.sub(mousePos, this.pos);
+                let distance = mouseForce.mag();
+                
+                if (distance < 150) {
+                    mouseForce.normalize();
+                    mouseForce.mult(map(distance, 0, 150, 2, 0));
+                    this.vel.add(mouseForce.mult(0.01));
+                }
+                
+                // Apply velocity
+                this.pos.add(this.vel);
+                
+                // Wrap edges
+                if (this.pos.x < 0) this.pos.x = width;
+                if (this.pos.x > width) this.pos.x = 0;
+                if (this.pos.y < 0) this.pos.y = height;
+                if (this.pos.y > height) this.pos.y = 0;
+                
+                // Add some damping
+                this.vel.mult(0.99);
+            }
+            
+            display() {
+                fill(200, 200, 200, 150);
+                noStroke();
+                ellipse(this.pos.x, this.pos.y, this.size);
+            }
+        }
+
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight);
+        }
+
+        // Navigation functionality
+        function toggleMobileMenu() {
+            const nav = document.getElementById('nav');
+            nav.classList.toggle('mobile-open');
+        }
+
+        // Smooth scrolling for navigation links
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+            
+            // Add click event listeners to nav links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                    
+                    // Close mobile menu after clicking
+                    const nav = document.getElementById('nav');
+                    nav.classList.remove('mobile-open');
+                });
+            });
+            
+            // Update active nav link on scroll
+            function updateActiveLink() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    if (sectionTop <= 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', updateActiveLink);
+            updateActiveLink(); // Initial call
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const nav = document.getElementById('nav');
+            const toggle = document.querySelector('.mobile-toggle');
+            
+            if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+                nav.classList.remove('mobile-open');
+            }
+        });
+    </script>
+</body>
+</html>
