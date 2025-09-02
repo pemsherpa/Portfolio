@@ -1,0 +1,94 @@
+Objective:
+
+Create a complete, single-file personal portfolio website that is a functional and visual replica of https://p5aholic.me/. The website must use my personal information, which is provided below. The final output should be a single index.html file that contains all necessary HTML, CSS (in a <style> tag), and JavaScript (in a <script> tag), including the p5.js library for the interactive background.
+
+Key Features & Requirements:
+
+Technology: Use HTML, CSS, and JavaScript.
+
+Interactive Background: Recreate the signature interactive particle/constellation effect from https://p5aholic.me/ using the p5.js library. This background should be present on the entire page and respond to mouse movement.
+
+Design & Layout:
+
+Theme: Dark mode, with a black or very dark grey background and light grey/white text, matching the reference site.
+
+Typography: Use a clean, monospaced font throughout the site (e.g., 'Courier New', 'monospace').
+
+Layout: A single-page, vertically scrolling layout with distinct sections for Home, About, Experience, Projects, and Contact.
+
+Responsiveness: The website must be fully responsive and look great on desktop, tablet, and mobile devices.
+
+Content for Each Section:
+
+1. Home / Landing Section:
+
+Main Heading: Pema Tshering Sherpa
+
+Subheading / Title: Software Developer | Junior Data Scientist | AI & Data Enthusiast
+
+Introduction Paragraph:
+I am a passionate developer and data scientist specializing in AI. I build dynamic, intelligent applications and leverage data to uncover insights and drive innovation.
+
+2. About Section:
+
+Heading: About
+
+Content:
+I am currently pursuing a Bachelor of Technology in AI and Data Science at RV University. My journey in technology is driven by a fascination with building intelligent systems that solve real-world problems. From developing a sign language translation device to engineering RAG pipelines for enterprise data, I thrive on challenges that sit at the intersection of software development and machine learning.
+My goal is to continue learning and contributing to innovative projects, particularly in the fields of AI, data analysis, and financial technology.
+
+3. Experience Section:
+
+Heading: Experience
+
+(Job 1)
+
+Role & Company: Software Developer - Brainservicing
+
+Dates: June 2025 - Present
+
+Description: Building ThinkEvents, an online event booking platform in Nepal, designed to bridge the gap between the entertainment industry and audiences.
+
+(Job 2)
+
+Role & Company: Software Developer Intern - CarbonSustain
+
+Dates: Jan 2025 - June 2025
+
+Description: Designed and implemented Python-based APIs and automated data pipelines for an AI-powered carbon emissions tracking platform (Scope 1-3). Collaborated in Agile teams to enhance reporting accuracy and scalability.
+
+(Job 3)
+
+Role & Company: Junior Software Developer / Junior Data Analyst - KarmaOps
+
+Dates: July 2024 - Feb 2025
+
+Description: Developed a Retrieval-Augmented Generation (RAG) pipeline for U.S. oil companies, improving data querying efficiency by ~15%. Cleaned and analyzed operational datasets to identify redundancies, leveraging ML for anomaly detection.
+
+4. Projects Section:
+
+Heading: Projects
+
+(Project 1)
+
+Title: SilentSync: Sign Language Converting Gloves
+
+Description: An innovative IoT project featuring gloves equipped with an ESP32 to translate sign language into English in real-time. This project secured 2nd place at the IEEE RAS Student Summit 2025 for its unique use of light signals for gesture detection.
+
+(Project 2)
+
+Title: RAG for KarmaOps
+
+Description: Built an MVP for KarmaOps using LangChain, Streamlit, and PostgreSQL. This agentic LLM-powered software was designed to query company data using natural language, estimated to increase operational efficiency by 15%.
+
+5. Contact / Footer Section:
+
+This section should contain links to my professional profiles. Please use the following details and add appropriate icons (like GitHub, LinkedIn, and Email icons):
+
+Email: ptssherpa5@gmail.com
+
+GitHub: (Use a placeholder link https://github.com for now)
+
+LinkedIn: (Use a placeholder link https://linkedin.com for now)
+
+Include a small "Designed & Built by Pema Tshering Sherpa" message at the very bottom.
