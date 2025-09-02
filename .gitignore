@@ -54,3 +54,11 @@ instance/
 # Replit (if any remnants remain)
 .replit
 .replitignore
+
+# Keep static folder (contains favicon)
+!static/
+!static/*.png
+!static/*.jpg
+!static/*.jpeg
+!static/*.gif
+!static/*.ico
