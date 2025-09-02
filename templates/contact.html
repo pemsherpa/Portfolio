@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Pema Tshering Sherpa - Contact{% endblock %}
+
+{% block extra_css %}
+<style>
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    padding: 1rem 0;
+    border-bottom: 1px solid #333;
+}
+
+.contact-link:hover {
+    color: #fff;
+    border-bottom-color: #555;
+}
+
+.contact-link i {
+    margin-right: 1.5rem;
+    width: 20px;
+    font-size: 1.2rem;
+}
+
+.footer-text {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+    color: #888;
+    font-size: 0.9rem;
+    text-align: center;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="contact-content">
+    <h2>Contact</h2>
+    <p style="margin-bottom: 3rem;">
+        I'm always interested in discussing new opportunities, collaborations, or just connecting with fellow developers and data enthusiasts. Feel free to reach out!
+    </p>
+    
+    <div class="contact-links">
+        <a href="mailto:ptssherpa5@gmail.com" class="contact-link">
+            <i class="fas fa-envelope"></i>
+            ptssherpa5@gmail.com
+        </a>
+        <a href="https://github.com" class="contact-link" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github"></i>
+            GitHub
+        </a>
+        <a href="https://linkedin.com" class="contact-link" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin"></i>
+            LinkedIn
+        </a>
+    </div>
+    
+    <div class="footer-text">
+        Designed & Built by Pema Tshering Sherpa
+    </div>
+</div>
+{% endblock %}

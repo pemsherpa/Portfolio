@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Pema Tshering Sherpa - Experience{% endblock %}
+
+{% block extra_css %}
+<style>
+.job {
+    margin-bottom: 3.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid #333;
+}
+
+.job:last-child {
+    border-bottom: none;
+}
+
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    gap: 2rem;
+}
+
+.job-title {
+    font-size: 1.3rem;
+    color: #fff;
+    font-weight: normal;
+}
+
+.job-date {
+    color: #888;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.job-description {
+    line-height: 1.8;
+    color: #ccc;
+}
+
+@media (max-width: 768px) {
+    .job-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="experience-content">
+    <h2>Experience</h2>
+    
+    <div class="job">
+        <div class="job-header">
+            <div class="job-title">Software Developer - Brainservicing</div>
+            <div class="job-date">June 2025 - Present</div>
+        </div>
+        <div class="job-description">
+            Building ThinkEvents, an online event booking platform in Nepal, designed to bridge the gap between the entertainment industry and audiences.
+        </div>
+    </div>
+
+    <div class="job">
+        <div class="job-header">
+            <div class="job-title">Software Developer Intern - CarbonSustain</div>
+            <div class="job-date">Jan 2025 - June 2025</div>
+        </div>
+        <div class="job-description">
+            Designed and implemented Python-based APIs and automated data pipelines for an AI-powered carbon emissions tracking platform (Scope 1-3). Collaborated in Agile teams to enhance reporting accuracy and scalability.
+        </div>
+    </div>
+
+    <div class="job">
+        <div class="job-header">
+            <div class="job-title">Junior Software Developer / Junior Data Analyst - KarmaOps</div>
+            <div class="job-date">July 2024 - Feb 2025</div>
+        </div>
+        <div class="job-description">
+            Developed a Retrieval-Augmented Generation (RAG) pipeline for U.S. oil companies, improving data querying efficiency by ~15%. Cleaned and analyzed operational datasets to identify redundancies, leveraging ML for anomaly detection.
+        </div>
+    </div>
+</div>
+{% endblock %}
