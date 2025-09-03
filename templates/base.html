@@ -108,8 +108,9 @@
         /* Mobile Menu Toggle */
         .mobile-toggle {
             position: fixed;
-            top: 1.5rem;
-            left: 1.5rem;
+            top: max(1rem, env(safe-area-inset-top));
+            right: max(1rem, env(safe-area-inset-right));
+            left: auto;
             z-index: 1001;
             background: rgba(10, 10, 10, 0.8);
             border: 1px solid #333;
@@ -120,6 +121,7 @@
             padding: 0.8rem;
             border-radius: 4px;
             backdrop-filter: blur(10px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
 
         /* Main Content */
@@ -204,7 +206,7 @@
             }
 
             .content-container {
-                padding: 4rem 2rem;
+                padding: 6rem 2rem 4rem;
             }
 
             .content-wrapper {
@@ -243,7 +245,7 @@
     <div id="p5-canvas"></div>
 
     <!-- Mobile Menu Toggle -->
-    <button class="mobile-toggle" onclick="toggleMobileMenu()">
+    <button class="mobile-toggle" onclick="toggleMobileMenu()" aria-label="Open navigation menu">
         <i class="fas fa-bars"></i>
     </button>
 
